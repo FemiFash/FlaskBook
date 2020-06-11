@@ -41,4 +41,7 @@ nosetests.xml
 # Virtual environment
 venv
 
+# Git Commit Stages
+gitstages.txt
+
 
