@@ -1,12 +1,3 @@
-"""
-SECRET_KEY = 'you-will-never-guess'
-DEBUG=True
-MONGODB_DB = 'flaskbook'
-HOSTNAME = 'https://yourapp-youruser.c9users.io'
-UPLOAD_FOLDER = '/home/ubuntu/workspace/flaskbook/static/images'
-STATIC_IMAGE_URL = 'images'
-"""
-
 import os
 
 SECRET_KEY = 'change_this_so_that_it_is_set_from_the_random_secret_key_generator'
