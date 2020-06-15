@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Registration Form{% endblock %}
+
+{% block content %}
+	<div class="content-section">
+		{% from "_formhelpers.html" import render_field %}
+		
+		<form method="POST" action="{{ url_for('.register') }}" role="form">
+		<!-- Note: "{{ url_for('.register') }}" is the same as "{{ url_for('user_app.register') }}"  -->
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+				<fieldset class="form-group">
+                 <legend class="border-bottom mb-4">Register Here</legend>
+                 <div class="form-group">
+					 {{ render_field(form.first_name, class='form-control') }}
+					 {{ render_field(form.last_name, class='form-control') }}
+					 
+					 {{ render_field(form.username, class='form-control') }}
+					 {{ render_field(form.email, class='form-control') }}
+					 
+					 {{ render_field(form.password, class='form-control') }}
+					 {{ render_field(form.confirm, class='form-control') }}                
+
+                 
+                 <button type="submit" class="btn btn-primary">Register</button>
+                 
+                 </div>
+            </fieldset>
+        </form>
+        
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{{ url_for('.login') }}">Sign In</a>
+        </small>
+    </div>
+{% endblock %}

@@ -4,8 +4,8 @@ from datetime import datetime
 
 class Users(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(30), unique=True)
-	password = db.Column(db.String(60)) 
+	username = db.Column(db.String(20), unique=True)
+	password = db.Column(db.String()) 
 	email = db.Column(db.String(35), unique=True)
 	first_name = db.Column(db.String(50))
 	last_name = db.Column(db.String(50))

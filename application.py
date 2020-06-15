@@ -8,5 +8,7 @@ app.config.from_pyfile('settings.py')
 
 db = SQLAlchemy(app) 
 
-from users.views import user_app  # registering blueprint app in central application.py file 
-app.register_blueprint(user_app) # ..... for app to be used in any other module.
+# registering blueprint app in central application.py  
+# file for app to be used in any other module.
+from users.views import user_app  
+app.register_blueprint(user_app)
