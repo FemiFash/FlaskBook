@@ -42,6 +42,6 @@ nosetests.xml
 venv
 
 # Git Commit Stages
-gitstages.txt
+gitStages.docx
 
 
