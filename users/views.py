@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from application import db
 from users.models import Users
-from users.forms import RegisterForm
+from users.forms import RegisterForm, LoginForm
 
 user_app = Blueprint('user_app', __name__)   # Anything named *_app is a Blueprint app
 
@@ -12,9 +12,11 @@ user_app = Blueprint('user_app', __name__)   # Anything named *_app is a Bluepri
 def index():
 	return "Index Page"
 
-@user_app.route('/login')
+@user_app.route('/login', methods=('GET', 'POST'))
 def login():
-	return "User login"
+	form = LoginForm()
+	error = None
+	return render_template('users/login.html', form=form, error=error )
 
 @user_app.route('/register', methods=('GET', 'POST'))
 def register():
