@@ -10,7 +10,8 @@ user_app = Blueprint('user_app', __name__)   # Anything named *_app is a Bluepri
 @user_app.route('/')
 @user_app.route('/index/')
 def index():
-	return "Index Page"
+	form = LoginForm()
+	return render_template('users/login.html',form=form)
 
 @user_app.route('/login', methods=('GET', 'POST'))
 def login():

@@ -1,5 +1,5 @@
 # Python library packages
-from flask_wtf import Form
+from flask_wtf import FlaskForm
 from wtforms import validators, StringField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import ValidationError
@@ -9,7 +9,7 @@ from users.models import Users
 
 
 
-class RegisterForm(Form):
+class RegisterForm(FlaskForm):
 	first_name = StringField('First Name', [
 		validators.DataRequired(),
 		validators.Length(max=50)
@@ -41,7 +41,7 @@ class RegisterForm(Form):
 		if Users.query.filter_by(email=field.data).first():
 			raise ValidationError("Email is already in use. Please choose a different one.") 
 
-class LoginForm(Form):
+class LoginForm(FlaskForm):
 	username = StringField('Username', [
 		validators.DataRequired(),
 		validators.Length(min=2, max=20)
