@@ -51,3 +51,5 @@ class LoginForm(Form):
 		validators.Length(min=8, max=60)
 		])
 	remember = BooleanField('Remember Me')
+	
+
