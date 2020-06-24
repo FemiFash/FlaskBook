@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-
+	
 	{% if title %}
 		<title>{{ title }}</title>
 	{% else %}
 		<title>Flask Book</title>
 	{% endif %}
+	{% block header %}{% endblock %}
 </head>
 
 <body>
@@ -31,8 +32,13 @@
 			</div>
 			<!-- Navbar Right Side -->
 			<div class="navbar-nav">
+			  {% if session.username %}
+			  <a class="nav-item nav-link" href="#">Welcome {{ session.username }}</a>
+			  <a class="nav-item nav-link" href="{{ url_for('.logout') }}">Logout</a>
+			  {% else %}
 			  <a class="nav-item nav-link" href="{{ url_for('.login') }}">Login</a>
 			  <a class="nav-item nav-link" href="{{ url_for('.register') }}">Register</a>
+			  {% endif %}
 			</div>
 		  </div>
 		</div>
@@ -41,14 +47,7 @@
 	
 	<!-- Main body layout & content -->
 	<main role="main" class="container">
-	  <div class="row">
-		
-		<div class="col-md-8">
-		  {% block content %}{% endblock %}
-		</div>
-		<div class="col-md-4"></div> 
-	  </div>
-	  
+		{% block content %}{% endblock %}
 	</main>
 
 

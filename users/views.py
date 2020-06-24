@@ -31,12 +31,17 @@ def login():
 					session.pop('next')	
 					return redirect(next)
 				else:
-					return 'User logged in'
+					return redirect(url_for('user_app.login'))
 			else:
 				user = None
 		if not user:
 			error = 'Login was Unsuccessful. Incorect username and/or password'	
 	return render_template('users/login.html', form=form, error=error )
+
+@user_app.route('/logout', methods=('GET', 'POST'))
+def logout():
+	session.pop('username')
+	return redirect(url_for('user_app.login'))
 
 @user_app.route('/register', methods=('GET', 'POST'))
 def register():
@@ -60,3 +65,13 @@ def register():
 			return render_template('users/register.html',form=form)
 		return "User Registered"
 	return render_template('users/register.html',form=form)
+
+@user_app.route('/<username>', methods=('GET', 'POST'))
+def profile(username):
+	user = Users.query.filter_by(username=username).first()
+	return render_template('users/profile.html', user=user)
+	
+	
+	
+	
+	

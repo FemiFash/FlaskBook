@@ -3,29 +3,36 @@
 {% block title %}Login Form{% endblock %}
 
 {% block content %}
-	<div class="content-section">
-		{% from "_formhelpers.html" import render_field %}
-		
-		<form method="POST" action="{{ url_for('.login') }}" role="form">
-		<!-- Note: "{{ url_for('.register') }}" is the same as "{{ url_for('user_app.register') }}"  -->
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8"> 	
+	
+		<div class="content-section">
+			{% from "_formhelpers.html" import render_field %}
+			
+			<form method="POST" action="{{ url_for('.login') }}" role="form">
+			<!-- Note: "{{ url_for('.register') }}" is the same as "{{ url_for('user_app.register') }}"  -->
+				{{ form.hidden_tag() }}
 				<fieldset class="form-group">
-                 <legend class="border-bottom mb-4">Login Here</legend>
-                 {% if error %}
-					 <div class="alert alert-danger" role="alert">{{ error }}</div>
-				 {% endif %}
-                 <div class="form-group">
-					 {{ render_field(form.username, class='form-control') }}
-					 {{ render_field(form.password, class='form-control') }}
-					 <button type="submit" class="btn btn-primary">Login</button>
-				 </div>
-			</fieldset>
-        </form>
-    </div>
-	<div class="border-top pt-1">
-        <small class="text-muted">
-            Need A New Account? <a class="ml-2" href="{{ url_for('.register') }}">Sign Up Now</a>
-        </small>
-    </div>
+					<fieldset class="form-group">
+					 <legend class="border-bottom mb-4">Login Here</legend>
+					 {% if error %}
+						 <div class="alert alert-danger" role="alert">{{ error }}</div>
+					 {% endif %}
+					 <div class="form-group">
+						 {{ render_field(form.username, class='form-control') }}
+						 {{ render_field(form.password, class='form-control') }}
+						 <button type="submit" class="btn btn-primary">Login</button>
+					 </div>
+				</fieldset>
+			</form>
+		</div>
+		<div class="border-top pt-1">
+			<small class="text-muted">
+				Need A New Account? <a class="ml-2" href="{{ url_for('.register') }}">Sign Up Now</a>
+			</small>
+		</div>
+
+	</div> <!-- end of div class="col-md-8" -->
+</div>    
 {% endblock %}

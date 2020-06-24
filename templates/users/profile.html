@@ -1,0 +1,77 @@
+{% extends "base.html" %} 
+
+{% block title %}{{ user.username }} - Profile{% endblock %} 
+
+{% block header %}<link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">{% endblock %}
+
+{% block content %} 
+
+<div class="row">
+	<div class="col-md-12 text-right">	
+		<button class="btn btn-success btn-md float-right" type="submit">Friends</button>
+	</div>
+</div> <!-- row -->
+
+<div class="row"> 
+
+	<div class="col-md-3">
+		<img class="img-thumbnail" src="//placehold.it/200x200" width="200" heigh="200" alt="{{ user.username }}">
+
+		<h3>{{ user.first_name }} {{ user.last_name }} </h3>
+		<h4><a href="{{ url_for('user_app.profile', username=user.username) }}" />@{{ user.username }}</a></h4>
+	</div> <!-- col-md-3 -->
+
+
+	<div class="col-md-6">
+		<div class="media">
+			<a href="#">
+				<img class="align-self-start mr-3" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
+			</a>
+			<div class="media-body">
+				<p>Luis Escobar <a href="#">@luis</a><br>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non massa ut ante interdum sagittis. Quisque eu sapien enim. Phasellus sit amet viverra massa, sit amet rhoncus dui. Nam tortor justo, finibus ut gravida et, accumsan ac sapien. Integer nec commodo libero. Nam auctor vestibulum congue. Donec convallis mollis lorem, eu mattis sem luctus in. Curabitur tincidunt odio sit amet nulla fringilla, vel gravida orci aliquam. Donec viverra mollis tortor, a suscipit risus molestie at. Sed ut tincidunt metus. Maecenas nec dignissim velit, eget placerat lectus.
+				</p>
+			</div>
+		</div> <!-- media -->
+
+		<div class="media">
+			<a href="#">
+				<img class="align-self-start mr-3" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
+			</a>
+			<div class="media-body">
+				<p>Luis Escobar <a href="#">@luis</a><br />
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non massa ut ante interdum sagittis. Quisque eu sapien enim. Phasellus sit amet viverra massa, sit amet rhoncus dui. Nam tortor justo, finibus ut gravida et, accumsan ac sapien. Integer nec commodo libero. Nam auctor vestibulum congue. Donec convallis mollis lorem, eu mattis sem luctus in. Curabitur tincidunt odio sit amet nulla fringilla, vel gravida orci aliquam. Donec viverra mollis tortor, a suscipit risus molestie at. Sed ut tincidunt metus. Maecenas nec dignissim velit, eget placerat lectus.
+				</p>
+			</div>
+		</div> <!-- media -->
+	</div> <!-- col-md-6 -->
+
+
+	<div class="col-md-3">
+		<h4><span aria-hidden="true">Friends </span><span class="badge badge-dark">4</span></h4>
+
+		<div class="media">
+			<a href="#">
+				<img class="align-self-start mr-3" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
+			</a>
+			<div class="media-body">
+				<p>Luis Escobar<br />
+					<a href="#">@luis</a>
+				</p>
+			</div>
+		</div> <!-- media -->
+
+		<div class="media">
+			<a href="#">
+				<img class="align-self-start mr-3" src="//placehold.it/50x50" width="50" heigh="50" alt="{{ user.username }}">
+			</a>
+			<div class="media-body">
+				<p>Luis Escobar<br />
+					<a href="#">@luis</a>
+				</p>
+			</div>
+		</div> <!-- media -->
+	</div> <!-- col-md-3 -->
+	
+</div> <!-- row -->
+{% endblock %}
