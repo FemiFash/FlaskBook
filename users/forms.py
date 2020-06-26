@@ -1,15 +1,17 @@
 # Python library packages
 from flask_wtf import FlaskForm
 from wtforms import validators, StringField, PasswordField, BooleanField
+from wtforms.widgets import TextArea
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import ValidationError
+import re  # regular expressions library
 
 # Application level packages/modules
 from users.models import Users
 
 
 
-class RegisterForm(FlaskForm):
+class BaseUserForm(FlaskForm):
 	first_name = StringField('First Name', [
 		validators.DataRequired(),
 		validators.Length(max=50)
@@ -26,6 +28,12 @@ class RegisterForm(FlaskForm):
 		validators.DataRequired(),
 		validators.Length(max=40)
 		])
+	bio = StringField('Bio',
+		widget=TextArea(),
+		validators=[validators.Length(max=160)]
+		)
+	
+class RegisterForm(BaseUserForm):
 	password = PasswordField('New Password', [
 		validators.DataRequired(),
 		validators.EqualTo('confirm', message='Passwords must match'),
@@ -36,6 +44,8 @@ class RegisterForm(FlaskForm):
 	def validate_username(form, field):
 		if Users.query.filter_by(username=field.data).first():
 			raise ValidationError("Username is already in use. Please choose a different one.")
+		if not re.match("^[a-zA-Z0-9_-]{2,20}$", field.data):
+			raise ValidationError("Username must consist of only alphabets, numbers, \"_\" or \"-\". ")
 			
 	def validate_email(form, field):
 		if Users.query.filter_by(email=field.data).first():
@@ -52,4 +62,5 @@ class LoginForm(FlaskForm):
 		])
 	remember = BooleanField('Remember Me')
 	
-
+class EditForm(BaseUserForm):
+	pass

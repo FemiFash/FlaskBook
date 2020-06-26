@@ -10,12 +10,12 @@ class Users(db.Model):
 	first_name = db.Column(db.String(50))
 	last_name = db.Column(db.String(50))
 	created = db.Column(db.DateTime, default=datetime.utcnow)
-	bio = db.Column(db.String(100)) 
+	bio = db.Column(db.String(160)) 
 	
 	def __init__(self, username, password, email, first_name, last_name, bio=None, created=None):
 		self.username = username
 		self.password = password
-		self.email = email
+		self.email = email.lower()
 		self.first_name = first_name
 		self.last_name = last_name
 		self.bio = bio
