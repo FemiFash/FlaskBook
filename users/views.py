@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, session
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session, abort
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from application import db
 from users.models import Users
-from users.forms import RegisterForm, LoginForm
+from users.forms import RegisterForm, LoginForm, EditForm
 
 user_app = Blueprint('user_app', __name__)   # Anything named *_app is a Blueprint app
 
@@ -68,10 +68,42 @@ def register():
 
 @user_app.route('/<username>', methods=('GET', 'POST'))
 def profile(username):
+	edit_profile = False
 	user = Users.query.filter_by(username=username).first()
-	return render_template('users/profile.html', user=user)
+	if session.get('username') and user.username == session.get('username'):
+		edit_profile = True
+	if user:
+		return render_template('users/profile.html', user=user, edit_profile=edit_profile)
+	else:
+		abort(404)
 	
-	
-	
-	
+@user_app.route('/edit', methods=('GET', 'POST'))
+def edit():
+	error = None
+	message = None
+	user = Users.query.filter_by(username=session.get('username')).first()
+	if user:
+		form = EditForm(obj=user) # prepopulates form with values in user
+		if form.validate_on_submit():
+			if user.username != form.username.data: # user is changing their username
+				if Users.query.filter_by(username=form.username.data).first():
+					error = "\"" + form.username.data + "\" is already in use"
+				else:
+					session['username'] = form.username.data
+			if user.email != form.email.data.lower(): # user is changing their email
+				if Users.query.filter_by(email=form.email.data.lower()).first():
+					error = "\"" + form.email.data + "\" is already in use"
+				else:
+					form.email.data = form.email.data.lower()
+			if not error:
+				form.populate_obj(user)
+				db.session.add(user)
+				db.session.commit()
+				message = "Your profile has been successfully updated"
+		return render_template("users/edit.html", form=form, error=error, message=message )
+	else:
+		abort(404)	
+					
+				
+		
 	
